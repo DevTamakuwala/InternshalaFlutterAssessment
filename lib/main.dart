@@ -103,11 +103,12 @@ class _ProductListPageState extends State<ProductListPage> {
     final dbData = await SQLHelper.getItems();
     data = dbData;
     stringFormat = data.map((map) => map.toString()).join('\n');
+    print(stringFormat);
   }
 
   Future<void> _fetchProducts() async {
     final response = await http.get(Uri.parse(
-        'https://app.apnabillbook.com/api/product?storeId=4ad3de84-bcaa-4bb2-9eb9-1846844e3314&page=$_currentPage&pageSize=15'));
+        'https://app.apnabillbook.com/api/product?storeId=4ad3de84-bcaa-4bb2-9eb9-1846844e3314&page=$_currentPage&pageSize=10'));
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       List<Product> products = (jsonData['data']['data'] as List)
